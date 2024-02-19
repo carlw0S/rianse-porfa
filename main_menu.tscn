@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5efqcsc0oxug"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_dr2ch"]
+[ext_resource type="Texture2D" uid="uid://3vfrm0ubab50" path="res://Art/inicio.png" id="2_25dmc"]
+[ext_resource type="Texture2D" uid="uid://cnefnle4plngf" path="res://Art/creditos.png" id="3_68p0l"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_dr2ch")
+
+[node name="Inicio" type="Sprite2D" parent="."]
+position = Vector2(578.4, 324.438)
+scale = Vector2(0.228182, 0.228182)
+texture = ExtResource("2_25dmc")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 832.0
+offset_top = 311.0
+offset_right = 990.0
+offset_bottom = 397.0
+text = "Jugar"
+
+[node name="CreditsButton" type="Button" parent="."]
+offset_left = 832.0
+offset_top = 436.0
+offset_right = 990.0
+offset_bottom = 506.0
+text = "Créditos"
+
+[node name="Creditos" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(861, 325)
+scale = Vector2(0.293458, 0.293458)
+texture = ExtResource("3_68p0l")
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+offset_left = 1031.0
+offset_top = 540.0
+offset_right = 1080.0
+offset_bottom = 571.0
+text = "Atrás"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=3 uid="uid://ed8yexoqvnqf"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_8nktj"]
+[ext_resource type="PackedScene" uid="uid://5vu3p67usfi6" path="res://joke_system.tscn" id="1_skxil"]
+[ext_resource type="Texture2D" uid="uid://lownvvhdkutr" path="res://Art/background.png" id="2_1lnyy"]
+[ext_resource type="Texture2D" uid="uid://5f3vsg6akwkb" path="res://Art/public_no_face.png" id="3_my8qo"]
+[ext_resource type="PackedScene" uid="uid://dii2ltl3ogg2w" path="res://player.tscn" id="4_eb7bd"]
+[ext_resource type="Texture2D" uid="uid://b50yiq3xi3dkf" path="res://Art/derecha 1.png" id="7_bgvok"]
+[ext_resource type="Texture2D" uid="uid://car7ydox2uctl" path="res://Art/izquierda 1.png" id="8_6auqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glue7"]
+size = Vector2(667.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4r3u3"]
+size = Vector2(20, 294)
+
+[sub_resource type="LabelSettings" id="LabelSettings_srfjl"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_an2mf"]
+font_size = 20
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_8nktj")
+
+[node name="ThrowableObjectsSpawns" type="Node2D" parent="."]
+position = Vector2(-8, 0)
+scale = Vector2(0.228491, 0.228491)
+
+[node name="Right1" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(4551.6, 2446.49)
+
+[node name="Right2" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(4901.73, 2542.77)
+
+[node name="Right3" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(4853.59, 2188.27)
+
+[node name="Left1" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(590.833, 2573.41)
+
+[node name="Left2" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(201.321, 2503.38)
+
+[node name="Left3" type="Node2D" parent="ThrowableObjectsSpawns"]
+position = Vector2(336.994, 2183.9)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-8, 0)
+scale = Vector2(0.228491, 0.228491)
+texture = ExtResource("2_1lnyy")
+centered = false
+
+[node name="Stage" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage"]
+position = Vector2(577.25, 516)
+shape = SubResource("RectangleShape2D_glue7")
+
+[node name="StageLimits" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="LeftCollision" type="CollisionShape2D" parent="StageLimits"]
+position = Vector2(233, 379)
+shape = SubResource("RectangleShape2D_4r3u3")
+
+[node name="RightCollision" type="CollisionShape2D" parent="StageLimits"]
+position = Vector2(921, 379)
+shape = SubResource("RectangleShape2D_4r3u3")
+
+[node name="PublicNoFace" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(577.035, 535.219)
+scale = Vector2(0.375518, 0.375518)
+texture = ExtResource("3_my8qo")
+
+[node name="JokeSystem" parent="." instance=ExtResource("1_skxil")]
+
+[node name="Player" parent="." instance=ExtResource("4_eb7bd")]
+position = Vector2(580, 433)
+
+[node name="SecondsTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Score" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 29.0
+offset_right = 183.0
+offset_bottom = 57.0
+text = "Puntos     10000
+"
+label_settings = SubResource("LabelSettings_srfjl")
+
+[node name="TimeRemaining" type="Label" parent="."]
+offset_left = 983.0
+offset_top = 28.0
+offset_right = 1122.0
+offset_bottom = 56.0
+text = "Tiempo     0:00"
+label_settings = SubResource("LabelSettings_an2mf")
+
+[node name="FacesRight" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(958, 549)
+scale = Vector2(0.241926, 0.241926)
+texture = ExtResource("7_bgvok")
+
+[node name="FacesLeft" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(201, 551)
+scale = Vector2(0.23445, 0.23445)
+texture = ExtResource("8_6auqr")
+
+[connection signal="joke_completed" from="JokeSystem" to="." method="_on_joke_system_joke_completed"]
+[connection signal="timeout" from="SecondsTimer" to="." method="_on_seconds_timer_timeout"]
