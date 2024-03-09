@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://p1yvdw0dnamu"]
+
+[ext_resource type="Texture2D" uid="uid://5s0tx7tvq1m0" path="res://theater/background.png" id="1_qu71k"]
+[ext_resource type="PackedScene" uid="uid://hgx7bk5rvavl" path="res://player/player.tscn" id="2_e14b2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgyid"]
+size = Vector2(668, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3v0n"]
+size = Vector2(20, 264)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-8, 0)
+scale = Vector2(0.228491, 0.228491)
+texture = ExtResource("1_qu71k")
+centered = false
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+position = Vector2(577, 515)
+
+[node name="Ground" type="CollisionShape2D" parent="Bounds"]
+shape = SubResource("RectangleShape2D_dgyid")
+
+[node name="Left" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-344, -122)
+shape = SubResource("RectangleShape2D_a3v0n")
+
+[node name="Right" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(344, -122)
+shape = SubResource("RectangleShape2D_a3v0n")
+
+[node name="Player" parent="." instance=ExtResource("2_e14b2")]
+position = Vector2(576, 271)
